@@ -22,6 +22,8 @@ public:
     void read_MAC();
     void outputMAC();
     void setPC();
+    void setForwardingTable();
+    void setOutputWindow();
 
 private:
     Ui::MainWindow *ui;

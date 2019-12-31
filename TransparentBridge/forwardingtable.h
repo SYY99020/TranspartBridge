@@ -41,15 +41,7 @@ public:
 //  void Inspect();
 //  void PrintTable();
 //  int rowcount(QString mac);
-    //在表格中查找特定item行数
-    static const int Table_width = 310;
-    static const int Table_height = 200;
-//    static const int conn_port = 3;
-    static const int frame_time= 1000;
-    static const int colwidth1 = 50;
-    static const int colwidth2 = 50;
-    static const int colwidth3 = 120;
-    static const int colwidth4 = 60;
+
 private:
     ForwardingTableItem* table = new ForwardingTableItem();
     Ui::ForwardingTable *ui;

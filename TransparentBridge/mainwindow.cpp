@@ -14,15 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     read_MAC();
     outputMAC();
     setPC();
-    ui->Bridge1Word->setGeometry(100,600,100,100);
-    ui->Bridge2Word->setGeometry(100,600,100,100);
-    ui->OutputWord->setGeometry(100,600,100,100);
-    ui->OutputLabel->setGeometry(100,600,100,100);
-    ui->ForwardingTable1->setGeometry(100,600,100,100);
-    ui->ForwardingTable2->setGeometry(100,600,100,100);
-
-    FT1 = new ForwardingTable(this);
-    FT2 = new ForwardingTable(this);
+    setForwardingTable();
+    setOutputWindow();
 }
 
 MainWindow::~MainWindow()
@@ -102,7 +95,51 @@ void MainWindow::setPC(){
     ui->PC6->setGeometry(x_pos+Width-pc_width,y_pos+Height-pc_height-20,pc_width,pc_height);
     ui->PC6Word->setGeometry(x_pos+Width-pc_width/2-15,y_pos+Height-20,30,20);
 
-    //    int bridge_height = read_config("Bridge","Height");
-//    int bridge_width = read_config("Bridge","Width");
+    int bridge_height = read_config("Bridge","Height");
+    int bridge_width = read_config("Bridge","Width");
 
+}
+
+void MainWindow::setForwardingTable(){
+    int Height = read_config("Forwarding_TABLE","Height");
+    int Width = read_config("Forwarding_TABLE","Width");
+    int x_pos_1 = read_config("Forwarding_TABLE","X_Pos_1");
+    int x_pos_2 = read_config("Forwarding_TABLE","X_Pos_2");
+    int y_pos = read_config("Forwarding_TABLE","Y_Pos");
+    int font_size = read_config("Label","FontSize");
+    QFont font;
+    font.setPointSize(font_size);//字体大小
+    ui->Bridge1Word->setFont(font);
+    ui->Bridge2Word->setFont(font);
+    int table_font = read_config("Forwarding_TABLE","FontSize");
+    QFont font2;
+    font2.setPointSize(table_font);//字体大小
+
+    ui->Bridge1Word->setGeometry(x_pos_1,y_pos,150,20);
+    ui->Bridge2Word->setGeometry(x_pos_2,y_pos,150,20);
+    FT1 = new ForwardingTable(this);
+    FT1->setGeometry(x_pos_1,y_pos+30,Width,Height-30);
+    FT1->setFont(font2);
+    FT2 = new ForwardingTable(this);
+    FT2->setGeometry(x_pos_2,y_pos+30,Width,Height-30);
+    FT2->setFont(font2);
+}
+
+void MainWindow::setOutputWindow(){
+    int font_size = read_config("Label","FontSize");
+    int output_size = read_config("OutputLabel","FontSize");
+    QFont font;
+    font.setPointSize(font_size);//字体大小
+    ui->OutputWord->setFont(font);
+    QFont font2;
+    font2.setPointSize(output_size);//字体大小
+    ui->OutputLabel->setFont(font2);
+
+    int Height = read_config("OutputLabel","Height");
+    int Width = read_config("OutputLabel","Width");
+    int x_pos = read_config("OutputLabel","X_Pos");
+    int y_pos = read_config("OutputLabel","Y_Pos");
+    ui->OutputWord->setGeometry(x_pos,y_pos,100,20);
+    ui->OutputLabel->setGeometry(x_pos,y_pos+30,Width,Height-20);
+//    ui->OutputLabel->setStyleSheet("border:1px solid red;");
 }

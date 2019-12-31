@@ -14,26 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="ForwardingTable1">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>250</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="ForwardingTable2">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>250</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="OutputWord">
     <property name="geometry">
      <rect>

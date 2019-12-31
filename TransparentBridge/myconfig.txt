@@ -1,5 +1,5 @@
 [Global]
-Height=800;
+Height=900;
 Width=1000;
 
 [MAC_INFO]
@@ -13,7 +13,7 @@ PC6=00:00:00:00:00:06;
 [PC_IMG]
 X_Pos=50;
 Y_Pos=50;
-Height=400;
+Height=350;
 Width=400;
 
 [Label]
@@ -36,12 +36,17 @@ FontSize=10;
 RowHeight=15;
 
 [Forwarding_TABLE]
+X_Pos_1=50;
+X_Pos_2=500;
+Y_Pos=450;
 Height=300;
 Width=500;
 FontSize=10;
 RowHeight=15;
 
 [OutputLabel]
-Height=300;
+X_Pos=100;
+Y_Pos=700;
+Height=200;
 Width=800;
 FontSize=10;

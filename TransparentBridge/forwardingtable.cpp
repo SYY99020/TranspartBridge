@@ -1,14 +1,13 @@
 #include "forwardingtable.h"
 #include "ui_forwardingtable.h"
 #include <QDebug>
-ForwardingTable::ForwardingTable(QWidget *parent) :
+ForwardingTable::ForwardingTable(QWidget *parent,int height,int width,int rowheight) :
     QWidget(parent),
     ui(new Ui::ForwardingTable)
 {
     ui->setupUi(this);
-//    table->next = NULL;
-
-    ui->tableWidget->setGeometry(0,0,Table_width,Table_height);
+    int colwidth1 = width / 5;
+    int colwidth2
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setColumnWidth(0, colwidth1);  //1 设置列宽
     ui->tableWidget->setColumnWidth(1, colwidth2);  //2 设置列宽
