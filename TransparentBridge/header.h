@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <fstream>
+#include <string>
 using namespace std;
 
 #define CONFIG_PATH "myconfig.txt"
