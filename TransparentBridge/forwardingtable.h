@@ -33,7 +33,7 @@ class ForwardingTable : public QWidget
     Q_OBJECT
 
 public:
-    explicit ForwardingTable(QWidget *parent,int height,int width,int rowheight);
+    explicit ForwardingTable(QWidget *parent,int height,int width,int rowheight,int lifespan);
     ~ForwardingTable();
     int insert(int id, QString mac, int port, int life);
     void delife(QString exclude);
@@ -45,5 +45,6 @@ public:
 private:
     ForwardingTableItem* table = new ForwardingTableItem();
     Ui::ForwardingTable *ui;
+    int LifeSpan;
 };
 #endif // FORWARDINGTABLE_H

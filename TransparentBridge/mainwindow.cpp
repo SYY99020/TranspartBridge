@@ -108,6 +108,7 @@ void MainWindow::setForwardingTable(){
     int y_pos = read_config("Forwarding_TABLE","Y_Pos");
     int Row_Height = read_config("Forwarding_TABLE","RowHeight");
     int font_size = read_config("Label","FontSize");
+    int lifespan = read_config("Forwarding_TABLE","LifeSpan");
     QFont font;
     font.setPointSize(font_size);//字体大小
     ui->Bridge1Word->setFont(font);
@@ -118,10 +119,10 @@ void MainWindow::setForwardingTable(){
 
     ui->Bridge1Word->setGeometry(x_pos_1,y_pos,150,20);
     ui->Bridge2Word->setGeometry(x_pos_2,y_pos,150,20);
-    FT1 = new ForwardingTable(this,Height-30,Width,Row_Height);
+    FT1 = new ForwardingTable(this,Height-30,Width,Row_Height,lifespan);
     FT1->setGeometry(x_pos_1,y_pos+30,Width,Height-30);
     FT1->setFont(font2);
-    FT2 = new ForwardingTable(this,Height-30,Width,Row_Height);
+    FT2 = new ForwardingTable(this,Height-30,Width,Row_Height,lifespan);
     FT2->setGeometry(x_pos_2,y_pos+30,Width,Height-30);
     FT2->setFont(font2);
 }

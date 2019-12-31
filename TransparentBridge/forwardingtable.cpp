@@ -1,11 +1,12 @@
 #include "forwardingtable.h"
 #include "ui_forwardingtable.h"
 #include <QDebug>
-ForwardingTable::ForwardingTable(QWidget *parent,int height,int width,int rowheight) :
+ForwardingTable::ForwardingTable(QWidget *parent,int height,int width,int rowheight,int lifespan) :
     QWidget(parent),
     ui(new Ui::ForwardingTable)
 {
     ui->setupUi(this);
+    LifeSpan = lifespan;
     int colwidth1 = width / 6;
     int colwidth3 = width / 6;
     int colwidth4 = width / 5;
