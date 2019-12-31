@@ -122,17 +122,178 @@
      <string>网桥2转发表</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="PC1">
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>111</width>
-      <height>91</height>
+      <width>71</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PC2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>180</y>
+      <width>71</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PC3">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>140</y>
+      <width>71</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PC4">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>150</y>
+      <width>71</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PC5">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>230</y>
+      <width>71</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PC6">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>160</y>
+      <width>71</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/myImage/Image/PC.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC1Word">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC2Word">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>170</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC3Word">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>200</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC3</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC4Word">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>140</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC4</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC5Word">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>160</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC5</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PC6Word">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>200</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PC6</string>
     </property>
    </widget>
   </widget>
