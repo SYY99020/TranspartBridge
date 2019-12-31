@@ -43,7 +43,8 @@ Height=300;
 Width=400;
 FontSize=8;
 RowHeight=15;
-LifeSpan=30;
+LifeTime=30;
+DeleteTime=1;
 
 [OutputLabel]
 X_Pos=100;

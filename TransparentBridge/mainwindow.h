@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QButtonGroup>
 #include <QMainWindow>
 #include "header.h"
 #include "forwardingtable.h"
@@ -25,11 +25,29 @@ public:
     void setForwardingTable();
     void setOutputWindow();
 
+    //确定PC是直连哪个网桥的
+    int which_bridge(int pc_id);
+    //网桥的地址学习及泛洪
+    void learning();
 private:
     Ui::MainWindow *ui;
     ifstream ifile;
     string PC_MAC[7];
     ForwardingTable* FT1;
     ForwardingTable* FT2;
+
+    QButtonGroup PC_button;
+
+    int life_time = 30;
+    int delete_time = 1;
+    //cur_click指当前的点击为sender or receiver
+    int cur_click = 0;
+    int send_pc = 0;
+    int recv_pc = 0;
+    QTimer *m_timer;//,*m2_timer;
+private slots:
+    void ButtonClick();
+    void delife();
+    void on_OK_clicked();
 };
 #endif // MAINWINDOW_H
