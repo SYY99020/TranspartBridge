@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <fstream>
 #include <string>
+#include <cstdlib>
+#include <cstdio>
 using namespace std;
 
 #define CONFIG_PATH "myconfig.txt"

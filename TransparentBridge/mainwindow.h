@@ -18,11 +18,11 @@ public:
     void open_config();
     void close_config();
     int read_config(string group, string item);
-    string read_MAC(int id);
+    void read_MAC();
 
 private:
     Ui::MainWindow *ui;
     ifstream ifile;
-
+    string PC_MAC[7];
 };
 #endif // MAINWINDOW_H
