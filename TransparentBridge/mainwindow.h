@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "header.h"
+#include "forwardingtable.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,5 +26,7 @@ private:
     Ui::MainWindow *ui;
     ifstream ifile;
     string PC_MAC[7];
+    ForwardingTable* FT1;
+    ForwardingTable* FT2;
 };
 #endif // MAINWINDOW_H

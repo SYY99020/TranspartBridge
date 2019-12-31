@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->MACTable->setGeometry(0,0,Width,Height);
     read_MAC();
     outputMAC();
+    FT1 = new ForwardingTable(this);
+    FT2 = new ForwardingTable(this);
 }
 
 MainWindow::~MainWindow()
