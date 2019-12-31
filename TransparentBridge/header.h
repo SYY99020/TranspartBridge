@@ -9,5 +9,6 @@
 using namespace std;
 
 #define CONFIG_PATH "../TransparentBridge/myconfig.txt"
+#define BRIDGE_PATH "../TransparentBridge/Image/Bridge.jpg"
 
 #endif // HEADER_H

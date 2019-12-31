@@ -97,7 +97,7 @@ void MainWindow::setPC(){
 
     int bridge_height = read_config("Bridge","Height");
     int bridge_width = read_config("Bridge","Width");
-
+    ui->paintlabel->Init(Width/3-bridge_width,Width/2+bridge_width,(Height-2*pc_height-40)/2-bridge_height/2,bridge_height,bridge_width);
 }
 
 void MainWindow::setForwardingTable(){
