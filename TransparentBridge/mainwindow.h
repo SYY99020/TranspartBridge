@@ -19,6 +19,7 @@ public:
     void close_config();
     int read_config(string group, string item);
     void read_MAC();
+    void outputMAC();
 
 private:
     Ui::MainWindow *ui;

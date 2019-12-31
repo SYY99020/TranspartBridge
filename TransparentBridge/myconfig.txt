@@ -10,6 +10,9 @@ PC4=00:00:00:00:00:04;
 PC5=00:00:00:00:00:05;
 PC6=00:00:00:00:00:06;
 
+[Label]
+FontSize=10;
+
 [PC]
 Height=100;
 Width=100;
@@ -19,8 +22,10 @@ Height=100;
 Width=100;
 
 [MAC_TABLE]
+X_Pos=500;
+Y_Pos=50;
 Height=300;
-Width=500;
+Width=400;
 FontSize=10;
 RowHeight=15;
 

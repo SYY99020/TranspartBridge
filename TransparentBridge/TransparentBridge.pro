@@ -18,7 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    paintlabel.cpp
+    paintlabel.cpp \
+    readconfig.cpp
 
 HEADERS += \
     header.h \
