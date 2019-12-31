@@ -6,8 +6,11 @@ ForwardingTable::ForwardingTable(QWidget *parent,int height,int width,int rowhei
     ui(new Ui::ForwardingTable)
 {
     ui->setupUi(this);
-    int colwidth1 = width / 5;
-    int colwidth2
+    int colwidth1 = width / 6;
+    int colwidth3 = width / 6;
+    int colwidth4 = width / 5;
+    int colwidth2 = width - colwidth1 - colwidth3 - colwidth4 - 10;
+    ui->tableWidget->setGeometry(0,0,width,height);
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setColumnWidth(0, colwidth1);  //1 设置列宽
     ui->tableWidget->setColumnWidth(1, colwidth2);  //2 设置列宽
@@ -15,7 +18,8 @@ ForwardingTable::ForwardingTable(QWidget *parent,int height,int width,int rowhei
     ui->tableWidget->setColumnWidth(3, colwidth4);  //4 设置列宽
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->horizontalHeader()->setDefaultAlignment(Qt::AlignHCenter);//表头字体居中
-    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"PC id"<<"MAC"<<"port"<<"life-span");
+    ui->tableWidget->setRowHeight(0,rowheight);
+    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"PC id"<<"MAC"<<"port"<<"life");
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//整行选中的方式
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 }

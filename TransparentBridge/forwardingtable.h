@@ -33,7 +33,7 @@ class ForwardingTable : public QWidget
     Q_OBJECT
 
 public:
-    explicit ForwardingTable(QWidget *parent = nullptr);
+    explicit ForwardingTable(QWidget *parent,int height,int width,int rowheight);
     ~ForwardingTable();
     int insert(int id, QString mac, int port, int life);
     void delife(QString exclude);

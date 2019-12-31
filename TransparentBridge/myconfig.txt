@@ -38,15 +38,15 @@ RowHeight=15;
 [Forwarding_TABLE]
 X_Pos_1=50;
 X_Pos_2=500;
-Y_Pos=450;
+Y_Pos=420;
 Height=300;
-Width=500;
-FontSize=10;
+Width=400;
+FontSize=8;
 RowHeight=15;
 
 [OutputLabel]
 X_Pos=100;
-Y_Pos=700;
+Y_Pos=735;
 Height=200;
 Width=800;
 FontSize=10;
