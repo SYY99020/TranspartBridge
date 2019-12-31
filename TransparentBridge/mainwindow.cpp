@@ -13,6 +13,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->MACTable->setGeometry(0,0,Width,Height);
     read_MAC();
     outputMAC();
+    setPC();
+    ui->Bridge1Word->setGeometry(100,600,100,100);
+    ui->Bridge2Word->setGeometry(100,600,100,100);
+    ui->OutputWord->setGeometry(100,600,100,100);
+    ui->OutputLabel->setGeometry(100,600,100,100);
+    ui->ForwardingTable1->setGeometry(100,600,100,100);
+    ui->ForwardingTable2->setGeometry(100,600,100,100);
+
     FT1 = new ForwardingTable(this);
     FT2 = new ForwardingTable(this);
 }
@@ -57,3 +65,44 @@ void MainWindow::outputMAC() {
     }
 }
 
+void MainWindow::setPC(){
+    int x_pos = read_config("PC_IMG","X_Pos");
+    int y_pos = read_config("PC_IMG","Y_Pos");
+    int Height = read_config("PC_IMG","Height");
+    int Width = read_config("PC_IMG","Width");
+    int pc_height = read_config("PC","Height");
+    int pc_width = read_config("PC","Width");
+    int font_size = read_config("Label","FontSize");
+    QFont font;
+    font.setPointSize(font_size);//字体大小
+    ui->PC1Word->setFont(font);
+    ui->PC2Word->setFont(font);
+    ui->PC3Word->setFont(font);
+    ui->PC4Word->setFont(font);
+    ui->PC5Word->setFont(font);
+    ui->PC6Word->setFont(font);
+    ui->paintlabel->setGeometry(x_pos,y_pos+pc_height+20,Width,Height-2*pc_height-40);
+//    ui->paintlabel->setStyleSheet("border:1px solid red;");
+
+    ui->PC1->setGeometry(x_pos,y_pos,pc_width,pc_height);
+    ui->PC1Word->setGeometry(x_pos+pc_width/2-15,y_pos+pc_width,30,20);
+
+    ui->PC2->setGeometry(x_pos,y_pos+Height-pc_height-20,pc_width,pc_height);
+    ui->PC2Word->setGeometry(x_pos+pc_width/2-15,y_pos+Height-20,30,20);
+
+    ui->PC3->setGeometry(x_pos+Width/2-pc_width/2,y_pos,pc_width,pc_height);
+    ui->PC3Word->setGeometry(x_pos+Width/2-15,y_pos+pc_width,30,20);
+
+    ui->PC4->setGeometry(x_pos+Width/2-pc_width/2,y_pos+Height-pc_height-20,pc_width,pc_height);
+    ui->PC4Word->setGeometry(x_pos+Width/2-15,y_pos+Height-20,30,20);
+
+    ui->PC5->setGeometry(x_pos+Width-pc_width,y_pos,pc_width,pc_height);
+    ui->PC5Word->setGeometry(x_pos+Width-pc_width/2-15,y_pos+pc_height,30,20);
+
+    ui->PC6->setGeometry(x_pos+Width-pc_width,y_pos+Height-pc_height-20,pc_width,pc_height);
+    ui->PC6Word->setGeometry(x_pos+Width-pc_width/2-15,y_pos+Height-20,30,20);
+
+    //    int bridge_height = read_config("Bridge","Height");
+//    int bridge_width = read_config("Bridge","Width");
+
+}

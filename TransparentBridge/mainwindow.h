@@ -21,6 +21,7 @@ public:
     int read_config(string group, string item);
     void read_MAC();
     void outputMAC();
+    void setPC();
 
 private:
     Ui::MainWindow *ui;
