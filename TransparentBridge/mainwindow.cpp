@@ -24,8 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     setForwardingTable();
     setOutputWindow();
     m_timer = new QTimer(this);
+    Ack_timer = new QTimer(this);
 //    m2_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(delife()));
+    connect(Ack_timer, SIGNAL(timeout()), this, SLOT());
     m_timer->start(FT1->delete_time*1000); //every 1 minutes ，每分钟调用一次
 }
 
@@ -99,6 +101,9 @@ void MainWindow::delife(){
 void MainWindow::learning(){
     int lifetime = FT1->life_time;
     qDebug() << lifetime;
+
+//    m2_timer = new QTimer(this);
+
     if(send_pc && recv_pc)
     {
         qDebug() << "send_pc " << send_pc << "recv_pc " << recv_pc;
@@ -106,6 +111,8 @@ void MainWindow::learning(){
         qDebug() << "send frame" ;
         Send(send_pc,recv_pc);
 
+//        connect(m_timer, SIGNAL(timeout()), this, SLOT());
+        Ack_timer->start(FT1->delete_time*1000); //every 1 second ，每秒调用一次
         //回包
         qDebug() << "Ack frame";
         Send(recv_pc,send_pc);
