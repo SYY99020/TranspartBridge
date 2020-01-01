@@ -100,7 +100,7 @@ void ForwardingTable::delife(){
 
 bool ForwardingTable::ifexist(int pc_id){
     ForwardingTableItem* p;
-    for(p = table; p->next; p = p->next){
+    for(p = table; p; p = p->next){
         if(p->ID == pc_id)
             return true;
     }

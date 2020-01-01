@@ -30,6 +30,7 @@ public:
     int which_bridge(int pc_id);
     //网桥的地址学习及泛洪
     void learning();
+    void Send(int, int);
 private:
     Ui::MainWindow *ui;
     ifstream ifile;
