@@ -109,6 +109,11 @@ void MainWindow::learning(){
         qDebug() << "send frame" ;
         DrawSend(send_pc,recv_pc,0);
         Send();
+        string s = "PC" + to_string(send_pc) + " MAC:";
+        s += PC_MAC[send_pc];
+        s += " send: Hello\n";
+        output += s;
+        ui->OutputLabel->setText(QString::fromStdString(output));
 
         int tmp = recv_pc;
         recv_pc = send_pc;
@@ -124,7 +129,14 @@ void MainWindow::learning(){
         }
         //回包
         Send();
-        DrawSend(recv_pc,send_pc,1);
+        DrawSend(send_pc,recv_pc,1);
+        string r = "PC" + to_string(send_pc) + " MAC:";
+        r += PC_MAC[send_pc];
+        r += " reply: Recved\n";
+        output += r;
+        ui->OutputLabel->setText(QString::fromStdString(output));
+
+
         //延时清空
         QTime _timer2 = QTime::currentTime().addMSecs(delayTime);
         while (QTime::currentTime() < _timer2) {
@@ -133,6 +145,8 @@ void MainWindow::learning(){
         for (int id = 0; id <= 6; id++){
             ui->paintlabel->chosen[id] = 0;
         }
+        output = "";
+        ui->OutputLabel->setText(QString::fromStdString(output));
     }
     else {
         return;
@@ -185,7 +199,6 @@ void MainWindow::Send(){
         }
     }
 }
-
 void MainWindow::DrawSend(int send_pc, int recv_pc, int isreply){
     //发送方
     ui->paintlabel->chosen[send_pc] = isreply + 1;

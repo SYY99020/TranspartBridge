@@ -62,6 +62,6 @@ DeleteTime=1;
 [OutputLabel]
 X_Pos=100;
 Y_Pos=735;
-Height=200;
+Height=100;
 Width=800;
 FontSize=10;

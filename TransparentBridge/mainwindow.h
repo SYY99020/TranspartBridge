@@ -48,6 +48,7 @@ private:
     int recv_pc = 0;
     QTimer *m_timer;
     int delayTime;
+    string output;
 private slots:
     void ButtonClick();
     void delife();

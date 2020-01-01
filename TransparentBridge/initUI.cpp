@@ -184,6 +184,7 @@ void MainWindow::setOutputWindow(){
     int y_pos = read_config("OutputLabel","Y_Pos");
     ui->OutputWord->setGeometry(x_pos,y_pos,100,20);
     ui->OutputLabel->setGeometry(x_pos,y_pos+30,Width,Height-20);
+    ui->OutputLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 //    ui->OutputLabel->setStyleSheet("border:1px solid red;");
 }
 

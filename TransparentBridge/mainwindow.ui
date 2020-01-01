@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>输出</string>
+     <string>INFO</string>
     </property>
    </widget>
    <widget class="QLabel" name="OutputLabel">
