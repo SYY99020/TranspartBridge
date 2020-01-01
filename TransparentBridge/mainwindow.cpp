@@ -108,7 +108,10 @@ void MainWindow::learning(){
             //泛洪时另一个转发表也要添加
             if(send_bridge == 1)
             {
+
                 FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
+                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
+
                 //泛洪时另一个转发表也要添加
                 if(!FT1->ifexist(recv_pc))
                     FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
@@ -116,6 +119,7 @@ void MainWindow::learning(){
             else if(send_bridge == 2)
             {
                 FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
+                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
                 if(!FT2->ifexist(recv_pc))
                     FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
             }
