@@ -63,7 +63,14 @@ void MainWindow::ButtonClick()
     else {
         exit(-1);
     }
-
+    if(send_pc && recv_pc && cur_click == 0){
+    ui->PC1->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    ui->PC2->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    ui->PC3->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    ui->PC4->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    ui->PC5->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    ui->PC6->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+    }
     if(cur_click == 0)
     {
         send_pc = PC_id;
