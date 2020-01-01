@@ -13,7 +13,8 @@ public:
     //连线
     int line = 0;   //线的数目
     QPointF beginpos[100],endpos[100];
-    int line_num[100];    // 记录端口之间线的序号 n代指PCn所连线，0表示网桥之间的连线
+    int line_num[100];    // 记录端口之间线的序号 n代指PCn所连线序号，0表示网桥之间的连线序号
+    int chosen[100];
 
 signals:
     void cursorchanged(QPaintEvent *event);

@@ -118,6 +118,7 @@ void MainWindow::setPC(){
         }
     };
     ui->paintlabel->line_num[0] = ui->paintlabel->line;
+    ui->paintlabel->chosen[0] = 0;
     ui->paintlabel->beginpos[ui->paintlabel->line] = Bridge_pos[0][4];
     ui->paintlabel->endpos[ui->paintlabel->line++] = Bridge_pos[0][0];
     ui->paintlabel->beginpos[ui->paintlabel->line] = Bridge_pos[0][0];
@@ -126,6 +127,7 @@ void MainWindow::setPC(){
     ui->paintlabel->endpos[ui->paintlabel->line++] = Bridge_pos[1][1];
 
     for (int id = 1; id <= 6; id++){
+        ui->paintlabel->chosen[id] = 0;
         ui->paintlabel->line_num[id] = ui->paintlabel->line;
         ui->paintlabel->beginpos[ui->paintlabel->line] = PC_pos[id];
         int choose = (id > 3) ? 1 : 0;
