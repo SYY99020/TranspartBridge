@@ -182,9 +182,9 @@ void MainWindow::setOutputWindow(){
     int Width = read_config("OutputLabel","Width");
     int x_pos = read_config("OutputLabel","X_Pos");
     int y_pos = read_config("OutputLabel","Y_Pos");
-    ui->OutputWord->setGeometry(x_pos,y_pos,100,20);
+    ui->OutputWord->setGeometry(x_pos-20,y_pos,100,20);
     ui->OutputLabel->setGeometry(x_pos,y_pos+30,Width,Height-20);
     ui->OutputLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-//    ui->OutputLabel->setStyleSheet("border:1px solid red;");
+//    ui->OutputLabel->setStyleSheet("border:1px solid black;");
 }
 

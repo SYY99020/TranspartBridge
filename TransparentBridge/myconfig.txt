@@ -51,7 +51,7 @@ RowHeight=15;
 [Forwarding_TABLE]
 X_Pos_1=50;
 X_Pos_2=500;
-Y_Pos=420;
+Y_Pos=520;
 Height=300;
 Width=400;
 FontSize=8;
@@ -60,8 +60,8 @@ LifeTime=30;
 DeleteTime=1;
 
 [OutputLabel]
-X_Pos=100;
-Y_Pos=735;
-Height=100;
+X_Pos=80;
+Y_Pos=430;
+Height=80;
 Width=800;
 FontSize=10;

@@ -66,15 +66,18 @@ void MainWindow::ButtonClick()
     if(cur_click == 0)
     {
         send_pc = PC_id;
+        output = "PC" + to_string(PC_id) + "-->";
         cur_click++;
     }
     else if(cur_click == 1){
         recv_pc = PC_id;
+        output += "PC" + to_string(PC_id);
         cur_click--;
     }
     else {
         exit(-1);
     }
+    ui->OutputLabel->setText(QString::fromStdString(output));
 
     //恢复前一个send/recv PC的格式，再给当前选中的PC上格式
     qDebug() << "send" << send_pc;
@@ -254,5 +257,7 @@ void MainWindow::DrawSend(int send_pc, int recv_pc, int isreply){
 }
 void MainWindow::on_OK_clicked()
 {
+    output = "";
+    ui->OutputLabel->setText(QString::fromStdString(output));
     learning();
 }

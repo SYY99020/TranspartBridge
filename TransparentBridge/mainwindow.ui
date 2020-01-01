@@ -363,19 +363,6 @@ QPushButton#pushButton:pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>530</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>OK</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="OK">
     <property name="geometry">
      <rect>
