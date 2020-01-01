@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     forwardingtable.cpp \
+    initUI.cpp \
     main.cpp \
     mainwindow.cpp \
     paintlabel.cpp \
