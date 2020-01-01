@@ -31,12 +31,25 @@ void PaintLabel::paintEvent(QPaintEvent *)
     painter.drawRect(QRect(Bridge_x_pos[0],Bridge_y_pos,Bridge_width,Bridge_height));
     painter.drawPixmap(Bridge_x_pos[1],Bridge_y_pos,Bridge_width,Bridge_height,pix);
     painter.drawRect(QRect(Bridge_x_pos[1],Bridge_y_pos,Bridge_width,Bridge_height));
+    //作端口
+    painter.setPen(QPen(Qt::darkGray,1));   //设置画笔形式
+    painter.drawText(QPointF(Bridge_x_pos[0]-15,Bridge_y_pos+Bridge_width/3-5),"1");
+    painter.drawText(QPointF(Bridge_x_pos[0]-15,Bridge_y_pos+Bridge_width/3*2+20),"2");
+    painter.drawText(QPointF(Bridge_x_pos[0]+Bridge_width+5,Bridge_y_pos+Bridge_width/3-5),"3");
+    painter.drawText(QPointF(Bridge_x_pos[0]+Bridge_width+5,Bridge_y_pos+Bridge_width/3*2+20),"4");
+    painter.drawText(QPointF(Bridge_x_pos[1]-15,Bridge_y_pos+Bridge_width/3+5),"1");
+    painter.drawText(QPointF(Bridge_x_pos[1]-15,Bridge_y_pos+Bridge_width/3*2+20),"2");
+    painter.drawText(QPointF(Bridge_x_pos[1]+Bridge_width+5,Bridge_y_pos+Bridge_width/3-5),"3");
+    painter.drawText(QPointF(Bridge_x_pos[1]+Bridge_width+5,Bridge_y_pos+Bridge_width/3*2+20),"4");
     //画线
     for (int i = 0; i <= 6; i++){
-        if (chosen[i]){
+        if (chosen[i] == 1){
             painter.setPen(QPen(Qt::red,2));
         }
-        else{
+        else if (chosen[i] == 2){
+            painter.setPen(QPen(Qt::blue,2));
+        }
+        else {
             painter.setPen(QPen(Qt::gray,1));
         }
         int next = (i == 0) ? 3 : 2;
