@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(Width,Height);
     ui->setupUi(this);
     ui->MACTable->setGeometry(0,0,Width,Height);
-    read_MAC();
+    read_MAC();    
     read_PORT();
     outputMAC();
     setPC();
@@ -95,12 +95,14 @@ void MainWindow::delife(){
     FT2->delife();
     m_timer->start(FT1->delete_time*1000); //every 1 minutes ，每分钟调用一次
 }
+
 void MainWindow::learning(){
     int lifetime = FT1->life_time;
     qDebug() << lifetime;
     if(send_pc && recv_pc)
     {
         int port = 1;
+        int send_port_B1, send_port_B2, recv_port_B1, recv_port_B2;
         int send_bridge = which_bridge(send_pc);
         int recv_bridge = which_bridge(recv_pc);
         //自发自收，recv_pc已在转发表中则不泛洪，否则泛洪
@@ -109,20 +111,29 @@ void MainWindow::learning(){
             //泛洪时另一个转发表也要添加
             if(send_bridge == 1)
             {
-
-                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
-                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
+                send_port_B1 = PC_port[send_pc];
+                recv_port_B1 = PC_port[recv_pc];
+                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B1,lifetime);
+                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B1,lifetime);
 
                 //泛洪时另一个转发表也要添加
-                if(!FT1->ifexist(recv_pc))
-                    FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
+                if(!FT1->ifexist(recv_pc)){
+                    send_port_B2 = Bridge_port[1];
+                    FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B2,lifetime);
+                }
             }
             else if(send_bridge == 2)
             {
-                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
-                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
-                if(!FT2->ifexist(recv_pc))
-                    FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
+                send_port_B2 = PC_port[send_pc];
+                recv_port_B2 = PC_port[recv_pc];
+                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B2,lifetime);
+                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B2,lifetime);
+
+                //泛洪时另一个转发表也要添加
+                if(!FT2->ifexist(recv_pc)){
+                    send_port_B1 = Bridge_port[0];
+                    FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B1,lifetime);
+                }
             }
             else {
                 exit(-1);
@@ -133,25 +144,30 @@ void MainWindow::learning(){
             if(send_bridge == 1)
             {
                 //发包的时候学习
-                qDebug() << "FT1 send_pc " << send_pc;
+                send_port_B1 = PC_port[send_pc];
+                send_port_B2 = Bridge_port[1];
+                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B1,lifetime);
+                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B2,lifetime);
 
-                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
-                qDebug() << "FT2 send_pc " << send_pc;
-                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
                 //回包的时候学习
-                qDebug() << "FT1 recv_pc " << recv_pc;
-                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
-                qDebug() << "FT2 recv_pc " << recv_pc;
-                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
+                recv_port_B2 = PC_port[recv_pc];
+                recv_port_B1 = Bridge_port[0];
+                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B2,lifetime);
+                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B1,lifetime);
             }
-            //网桥2给网桥1发
+                //网桥2给网桥1发
             else if (send_bridge == 2) {
                 //发包的时候学习
-                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
-                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),port,lifetime);
+                send_port_B2 = PC_port[send_pc];
+                send_port_B1 = Bridge_port[0];
+                FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B2,lifetime);
+                FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),send_port_B1,lifetime);
+
                 //回包的时候学习
-                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
-                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),port,lifetime);
+                recv_port_B1 = PC_port[recv_pc];
+                recv_port_B2 = Bridge_port[1];
+                FT1->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B1,lifetime);
+                FT2->insert(recv_pc,QString::fromStdString(PC_MAC[recv_pc]),recv_port_B2,lifetime);
             }
         }
     }
@@ -159,6 +175,7 @@ void MainWindow::learning(){
         return;
     }
 }
+
 void MainWindow::on_OK_clicked()
 {
     learning();

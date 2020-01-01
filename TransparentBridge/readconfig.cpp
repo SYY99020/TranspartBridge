@@ -60,6 +60,44 @@ void MainWindow::read_MAC(){
     return;
 }
 
+int MainWindow::read_config(string group, string item){
+    open_config();
+    // find group
+    while (!ifile.eof()) {
+        string st = "";
+        ifile >> st;
+        string::size_type start, end;
+        start = st.find("[");
+        if (start == string::npos)
+            continue;
+        end = st.find("]");
+        string key = st.substr(start + 1,end - start - 1);
+//        qDebug() << QString::fromStdString(key);
+        if (key == group)
+            break;
+    }
+    if (ifile.eof())
+        return -1;
+    while (!ifile.eof()) {
+        string st = "";
+        ifile >> st;
+        string::size_type equal;
+        equal = st.find("=");
+        if (equal == string::npos)
+            break;
+        string key = st.substr(0,equal);
+        string value = st.substr(equal+1, st.length() - equal - 2);
+//        qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+        if (key == item){
+            close_config();
+//            qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+            return atoi(value.c_str());
+        }
+    }
+    close_config();
+    return -1;
+}
+
 void MainWindow::read_PORT(){
     open_config();
     // find group
@@ -125,42 +163,4 @@ void MainWindow::read_PORT(){
     }
     close_config();
     return;
-}
-
-int MainWindow::read_config(string group, string item){
-    open_config();
-    // find group
-    while (!ifile.eof()) {
-        string st = "";
-        ifile >> st;
-        string::size_type start, end;
-        start = st.find("[");
-        if (start == string::npos)
-            continue;
-        end = st.find("]");
-        string key = st.substr(start + 1,end - start - 1);
-//        qDebug() << QString::fromStdString(key);
-        if (key == group)
-            break;
-    }
-    if (ifile.eof())
-        return -1;
-    while (!ifile.eof()) {
-        string st = "";
-        ifile >> st;
-        string::size_type equal;
-        equal = st.find("=");
-        if (equal == string::npos)
-            break;
-        string key = st.substr(0,equal);
-        string value = st.substr(equal+1, st.length() - equal - 2);
-//        qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
-        if (key == item){
-            close_config();
-//            qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
-            return atoi(value.c_str());
-        }
-    }
-    close_config();
-    return -1;
 }
