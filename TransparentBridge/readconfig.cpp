@@ -98,7 +98,7 @@ void MainWindow::read_PORT(){
         string value = st.substr(equal+1, st.length() - equal - 2);
 //        qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
         if (key == item){
-            PC_PORT[id] = atoi(value.c_str());
+            PC_port[id] = atoi(value.c_str());
 //            qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
         }
     }
