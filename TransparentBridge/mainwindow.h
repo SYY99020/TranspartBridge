@@ -20,6 +20,7 @@ public:
     void close_config();
     int read_config(string group, string item);
     void read_MAC();
+    void read_PORT();
     void outputMAC();
     void setPC();
     void setForwardingTable();
@@ -33,6 +34,8 @@ private:
     Ui::MainWindow *ui;
     ifstream ifile;
     string PC_MAC[7];
+    int PC_PORT[7];
+    int Bridge_port[2];
     ForwardingTable* FT1;
     ForwardingTable* FT2;
 

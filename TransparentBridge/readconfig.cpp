@@ -60,6 +60,73 @@ void MainWindow::read_MAC(){
     return;
 }
 
+void MainWindow::read_PORT(){
+    open_config();
+    // find group
+    while (!ifile.eof()) {
+        string st = "";
+        ifile >> st;
+        string::size_type start, end;
+        start = st.find("[");
+        if (start == string::npos)
+            continue;
+        end = st.find("]");
+        string key = st.substr(start + 1,end - start - 1);
+//        qDebug() << QString::fromStdString(key);
+        if (key == "PORT_INFO")
+            break;
+    }
+    if (ifile.eof()){
+        close_config();
+        qDebug() << "config have no PORT_INFO";
+        exit(-1);
+    }
+    for (int id = 1; id <= 6; id++){
+        string item = "PC";
+        string num;
+        item += to_string(id);
+        string st = "";
+        ifile >> st;
+        string::size_type equal;
+        equal = st.find("=");
+        if (equal == string::npos){
+            close_config();
+            qDebug() << "config error";
+            exit(-1);
+        }
+        string key = st.substr(0,equal);
+        string value = st.substr(equal+1, st.length() - equal - 2);
+//        qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+        if (key == item){
+            PC_PORT[id] = atoi(value.c_str());
+//            qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+        }
+    }
+    for (int id = 0; id < 2; id++){
+        string item = "Bridge";
+        string num;
+        item += to_string(id+1);
+        string st = "";
+        ifile >> st;
+        string::size_type equal;
+        equal = st.find("=");
+        if (equal == string::npos){
+            close_config();
+            qDebug() << "config error";
+            exit(-1);
+        }
+        string key = st.substr(0,equal);
+        string value = st.substr(equal+1, st.length() - equal - 2);
+//        qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+        if (key == item){
+            Bridge_port[id] = atoi(value.c_str());
+//            qDebug() << QString::fromStdString(key) << QString::fromStdString(value);
+        }
+    }
+    close_config();
+    return;
+}
+
 int MainWindow::read_config(string group, string item){
     open_config();
     // find group

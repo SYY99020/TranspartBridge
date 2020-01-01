@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->MACTable->setGeometry(0,0,Width,Height);
     read_MAC();
+    read_PORT();
     outputMAC();
     setPC();
     connect(ui->PC1, SIGNAL(clicked()), this, SLOT(ButtonClick()));
