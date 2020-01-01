@@ -47,7 +47,9 @@ int ForwardingTable::insert(int id, QString mac, int port, int life){
         {
             p->LIFE = life;
             qDebug() <<"update";
+            qDebug() << "i-1" << i-1;
             ui->tableWidget->setItem(i-1,3,new QTableWidgetItem(QString::number(life)));
+//            ui->tableWidget->setItem(i-1,3,new QTableWidgetItem(QString::number(life)));
             return i;
         }
 //        qDebug() << "insert2";
