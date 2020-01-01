@@ -40,6 +40,7 @@ MainWindow::~MainWindow()
 void MainWindow::ButtonClick()
 {
     QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    //btn->setStyleSheet("QPushButton{background-color:rgb(255,255,0)}");
     int PC_id;
     if("PC1" == btn->objectName()){
         PC_id = 1;
@@ -66,10 +67,12 @@ void MainWindow::ButtonClick()
     if(cur_click == 0)
     {
         send_pc = PC_id;
+        btn->setStyleSheet("QPushButton{background-color:rgb(221, 1, 5)}");
         cur_click++;
     }
     else if(cur_click == 1){
         recv_pc = PC_id;
+        btn->setStyleSheet("QPushButton{background-color:rgb(87, 95, 255)}");
         cur_click--;
     }
     else {
@@ -147,6 +150,12 @@ void MainWindow::learning(){
         }
         output = "";
         ui->OutputLabel->setText(QString::fromStdString(output));
+        ui->PC1->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+        ui->PC2->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+        ui->PC3->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+        ui->PC4->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+        ui->PC5->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+        ui->PC6->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
     }
     else {
         return;
@@ -254,5 +263,11 @@ void MainWindow::DrawSend(int send_pc, int recv_pc, int isreply){
 }
 void MainWindow::on_OK_clicked()
 {
+//    ui->PC1->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+//    ui->PC2->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+//    ui->PC3->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+//    ui->PC4->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+//    ui->PC5->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
+//    ui->PC6->setStyleSheet("QPushButton{background-color:rgb(255,255,255)}");
     learning();
 }
