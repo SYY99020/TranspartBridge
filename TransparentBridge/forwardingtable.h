@@ -36,16 +36,12 @@ public:
     explicit ForwardingTable(QWidget *parent,int height,int width,int rowheight,int lifetime,int deletetime);
     ~ForwardingTable();
     int insert(int id, QString mac, int port, int life);
-    void delife(QString exclude);
+    void delife();
     bool ifexist(int pc_id);
-//  void Update(const Frame *FRAME,const bool src_if_device,const bool dst_if_device);
-//  void Inspect();
-//  void PrintTable();
-//  int rowcount(QString mac);
+    int life_time;
+    int delete_time;
 private:
     ForwardingTableItem* table = new ForwardingTableItem();
     Ui::ForwardingTable *ui;
-    int life_time;
-    int delete_time;
 };
 #endif // FORWARDINGTABLE_H

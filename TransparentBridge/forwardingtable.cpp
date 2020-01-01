@@ -34,33 +34,25 @@ ForwardingTable::~ForwardingTable()
 int ForwardingTable::insert(int id, QString mac, int port, int life){
     ForwardingTableItem* p;
     ForwardingTableItem* s = new ForwardingTableItem(id,mac,port,life);// = nullptr;
-
-//    qDebug() << s->ID << s->MAC << s->LIFE << s->PORT;
-//    qDebug() << "insert";
     int i = 0;
-//    qDebug() << "insert_1";
-    for(p = table; p->next; p = p->next){
-        i++;
-//        qDebug() << "insert1";
+    for(p = table; p; p = p->next){
+
         //转发表中已经存在，则更新为最新的life
         if(!QString::compare(p->MAC,mac))
         {
-            p->LIFE = life;
+            p->LIFE = life;/*
             qDebug() <<"update";
-            qDebug() << "i-1" << i-1;
+            qDebug() << "i-1" << i-1;*/
             ui->tableWidget->setItem(i-1,3,new QTableWidgetItem(QString::number(life)));
-//            ui->tableWidget->setItem(i-1,3,new QTableWidgetItem(QString::number(life)));
             return i;
         }
-//        qDebug() << "insert2";
+        if(!p->next)
+            break;
+        i++;
     }
-
-//    qDebug() << "bianli";
-//    qDebug() << "bianli1";
-//    qDebug() << "bianli2";
     p->next = s;
 
-//    qDebug() << s->ID;
+    qDebug() << s->ID;
     int RowCont;
     RowCont=ui->tableWidget->rowCount();
     ui->tableWidget->insertRow(RowCont);//增加一行
@@ -70,45 +62,38 @@ int ForwardingTable::insert(int id, QString mac, int port, int life){
     ui->tableWidget->setItem(RowCont,2,new QTableWidgetItem(QString::number(port)));
     ui->tableWidget->setItem(RowCont,3,new QTableWidgetItem(QString::number(life)));
 
-//    qDebug() << "i+1" <<i+1;
     return i+1;
 }
 
-void ForwardingTable::delife(QString exclude){
+void ForwardingTable::delife(){
     ForwardingTableItem* p;
     ForwardingTableItem* father;
-    for(p = table; p->next; father=p, p = p->next){
-        if(!QString::compare(p->MAC,exclude))
+    for(p = table; p;){
+        if(p->LIFE == 1)
+        {
+//            qDebug() << "table life";
+            father->next=p->next;
+            p->next=nullptr;
+            delete p;
+//            qDebug() << "table life1";
+            p=father->next;
             continue;
+        }
         else {
-            if(p->LIFE == 1)
-            {
-                father->next=p->next;
-                p->next=nullptr;
-                delete p;
-            }
-            else {
-                p->LIFE-= delete_time;
-            }
+            p->LIFE-= delete_time;
+            father = p;
+            p = p->next;
         }
     }
     int RowCont = ui->tableWidget->rowCount();
-//    qDebug() << "row" <<RowCont;
-    for(int i=0; i < RowCont; i++)
+    for(int i=RowCont-1; i >= 0; i--)
     {
-//        qDebug() << "i" << i;
-        if(!QString::compare(ui->tableWidget->item(i, 1)->text(),exclude)){
-            continue;
+        int life = ui->tableWidget->item(i, 3)->text().toInt();
+        if(life == 1){
+            ui->tableWidget->removeRow(i);
         }
-        else{
-//            qDebug() << "life" ;
-            int life = ui->tableWidget->item(i, 3)->text().toInt();
-//            qDebug() << life;
-            if(life == 1)
-                ui->tableWidget->removeRow(i);
-            else {
-                ui->tableWidget->setItem(i,3,new QTableWidgetItem(QString::number(life-delete_time)));
-            }
+        else {
+            ui->tableWidget->setItem(i,3,new QTableWidgetItem(QString::number(life-delete_time)));
         }
     }
 }

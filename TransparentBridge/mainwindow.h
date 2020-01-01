@@ -38,8 +38,6 @@ private:
 
     QButtonGroup PC_button;
 
-    int life_time = 30;
-    int delete_time = 1;
     //cur_click指当前的点击为sender or receiver
     int cur_click = 0;
     int send_pc = 0;
