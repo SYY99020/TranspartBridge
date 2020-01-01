@@ -34,7 +34,7 @@ private:
     Ui::MainWindow *ui;
     ifstream ifile;
     string PC_MAC[7];
-    int PC_PORT[7];
+    int PC_port[7];
     int Bridge_port[2];
     ForwardingTable* FT1;
     ForwardingTable* FT2;
