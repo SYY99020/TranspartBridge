@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "header.h"
 #include <QTimer>
+#include <QTime>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,11 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     setForwardingTable();
     setOutputWindow();
     m_timer = new QTimer(this);
-    Ack_timer = new QTimer(this);
-//    m2_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(delife()));
-    connect(Ack_timer, SIGNAL(timeout()), this, SLOT());
+
     m_timer->start(FT1->delete_time*1000); //every 1 minutes ，每分钟调用一次
+
 }
 
 MainWindow::~MainWindow()
@@ -95,37 +95,41 @@ void MainWindow::delife(){
     FT1->delife();
 //    qDebug()  << "FT2--------------";
     FT2->delife();
-    m_timer->start(FT1->delete_time*1000); //every 1 minutes ，每分钟调用一次
 }
 
 void MainWindow::learning(){
     int lifetime = FT1->life_time;
     qDebug() << lifetime;
 
-//    m2_timer = new QTimer(this);
-
     if(send_pc && recv_pc)
     {
         qDebug() << "send_pc " << send_pc << "recv_pc " << recv_pc;
         //发包
         qDebug() << "send frame" ;
-        Send(send_pc,recv_pc);
+        Send();
 
-//        connect(m_timer, SIGNAL(timeout()), this, SLOT());
-        Ack_timer->start(FT1->delete_time*1000); //every 1 second ，每秒调用一次
+        int tmp = recv_pc;
+        recv_pc = send_pc;
+        send_pc = tmp;
+
+        //回包延时1秒
+        QTime _timer = QTime::currentTime().addMSecs(1000);
+        while (QTime::currentTime() < _timer) {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
         //回包
-        qDebug() << "Ack frame";
-        Send(recv_pc,send_pc);
+        Send();
     }
     else {
         return;
     }
 }
 
-void MainWindow::Send(int send_pc,int recv_pc){
+void MainWindow::Send(){
     int send_bridge = which_bridge(send_pc);
     int recv_bridge = which_bridge(recv_pc);
     int lifetime = FT1->life_time;
+    qDebug() << "send_bridge " << send_bridge << " recv_bridge " << recv_bridge;
     if(send_bridge == recv_bridge)
     {
         //泛洪时另一个转发表也要添加

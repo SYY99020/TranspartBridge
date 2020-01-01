@@ -30,7 +30,7 @@ public:
     int which_bridge(int pc_id);
     //网桥的地址学习及泛洪
     void learning();
-    void Send(int, int);
+
 private:
     Ui::MainWindow *ui;
     ifstream ifile;
@@ -47,10 +47,10 @@ private:
     int send_pc = 0;
     int recv_pc = 0;
     QTimer *m_timer;//,*m2_timer;
-    QTimer *Ack_timer;
 private slots:
     void ButtonClick();
     void delife();
     void on_OK_clicked();
+    void Send();
 };
 #endif // MAINWINDOW_H
