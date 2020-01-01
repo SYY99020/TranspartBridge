@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     int Height = read_config("Global","Height");
     int Width = read_config("Global","Width");
     this->setFixedSize(Width,Height);
+    this->delayTime = read_config("TimeDelay","Time");
     ui->setupUi(this);
     ui->MACTable->setGeometry(0,0,Width,Height);
     read_MAC();    
@@ -106,19 +107,32 @@ void MainWindow::learning(){
         qDebug() << "send_pc " << send_pc << "recv_pc " << recv_pc;
         //发包
         qDebug() << "send frame" ;
+        DrawSend(send_pc,recv_pc,0);
         Send();
 
         int tmp = recv_pc;
         recv_pc = send_pc;
         send_pc = tmp;
 
-        //回包延时1秒
-        QTime _timer = QTime::currentTime().addMSecs(1000);
+        //回包延时
+        QTime _timer = QTime::currentTime().addMSecs(delayTime);
         while (QTime::currentTime() < _timer) {
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         }
+        for (int id = 0; id <= 6; id++){
+            ui->paintlabel->chosen[id] = 0;
+        }
         //回包
         Send();
+        DrawSend(recv_pc,send_pc,1);
+        //延时清空
+        QTime _timer2 = QTime::currentTime().addMSecs(delayTime);
+        while (QTime::currentTime() < _timer2) {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+        for (int id = 0; id <= 6; id++){
+            ui->paintlabel->chosen[id] = 0;
+        }
     }
     else {
         return;
@@ -168,6 +182,60 @@ void MainWindow::Send(){
             //发包的时候学习
             FT2->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),PC_port[send_pc],lifetime);
             FT1->insert(send_pc,QString::fromStdString(PC_MAC[send_pc]),Bridge_port[0],lifetime);
+        }
+    }
+}
+
+void MainWindow::DrawSend(int send_pc, int recv_pc, int isreply){
+    //发送方
+    ui->paintlabel->chosen[send_pc] = isreply + 1;
+    //接收方
+    ui->paintlabel->chosen[recv_pc] = isreply + 1;
+    //网桥中间通信
+    if (which_bridge(send_pc) != which_bridge(recv_pc)){
+        ui->paintlabel->chosen[0] = isreply + 1;
+        if (!FT1->ifexist(recv_pc)){
+            //泛洪
+            for (int id = 1; id <= 3; id++){
+                ui->paintlabel->chosen[id] = isreply + 1;
+            }
+        }
+        if (!FT2->ifexist(recv_pc)){
+            //泛洪
+            ui->paintlabel->chosen[0] = isreply + 1;
+            for (int id = 4; id <= 6; id++){
+                ui->paintlabel->chosen[id] = isreply + 1;
+            }
+        }
+    }
+    else{
+        if (which_bridge(send_pc) == 1){
+            if (!FT1->ifexist(recv_pc)){
+                //泛洪
+                ui->paintlabel->chosen[0] = isreply + 1;
+                for (int id = 1; id <= 3; id++){
+                    ui->paintlabel->chosen[id] = isreply + 1;
+                }
+                if (!FT2->ifexist(recv_pc)){
+                    for (int id = 4; id <= 6; id++){
+                        ui->paintlabel->chosen[id] = isreply + 1;
+                    }
+                }
+            }
+        }
+        else{
+            if (!FT2->ifexist(recv_pc)){
+                //泛洪
+                ui->paintlabel->chosen[0] = isreply + 1;
+                for (int id = 1; id <= 3; id++){
+                    ui->paintlabel->chosen[id] = isreply + 1;
+                }
+                if (!FT1->ifexist(recv_pc)){
+                    for (int id = 4; id <= 6; id++){
+                        ui->paintlabel->chosen[id] = isreply + 1;
+                    }
+                }
+            }
         }
     }
 }

@@ -29,6 +29,9 @@ Width=400;
 [Label]
 FontSize=10;
 
+[TimeDelay]
+Time=3000;
+
 [PC]
 Height=60;
 Width=60;
